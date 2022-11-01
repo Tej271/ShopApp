@@ -1,11 +1,24 @@
 import React from "react";
 import FooterList from "./FooterList";
+import axios from "axios";
 
 function Footer() {
   const [email, setEmail] = React.useState("");
 
+  const postConfig = {
+    method: "post",
+    url: "https://shop-4c338-default-rtdb.firebaseio.com/emails.json",
+    headers: { "Content-Type": "application/json" },
+    data: { email: email },
+  };
   const PostData = async () => {
-    console.log("posted");
+    axios(postConfig)
+      .then((response) => {
+        console.log("Posted");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   const lists = [
